@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var count:Int = 0
+    @AppStorage("count") var count:Int = 0
+    
     var body: some View {
         VStack {
             Text("\(count)")
