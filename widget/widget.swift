@@ -52,6 +52,16 @@ struct widgetEntryView : View {
     var body: some View {
         VStack {
             Text("\(entry.count)")
+            
+            HStack {
+                Button(intent: CountIntent(change: -1), label: {
+                    Text("-1")
+                })
+                
+                Button(intent: CountIntent(change: 1), label: {
+                    Text("+1")
+                })
+            }
         }
     }
 }
