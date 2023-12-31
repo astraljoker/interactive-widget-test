@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), count: getCount())
+        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration, count: getCount())
+        SimpleEntry(date: Date(), configuration: configuration)
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -24,34 +24,27 @@ struct Provider: AppIntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration, count: getCount())
+            let entry = SimpleEntry(date: entryDate, configuration: configuration)
             entries.append(entry)
         }
 
         return Timeline(entries: entries, policy: .atEnd)
-    }
-    
-    func getCount() -> Int {
-        if let store = UserDefaults(suiteName: "group.test") {
-            return store.integer(forKey: "count")
-        } else {
-            return 0
-        }
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationAppIntent
-    let count: Int
 }
 
 struct widgetEntryView : View {
+    @ObservedObject var sharedData = SharedData.it
+    
     var entry: Provider.Entry
     
     var body: some View {
         VStack {
-            Text("\(entry.count)")
+            Text("\(sharedData.count)")
             
             HStack {
                 Button(intent: CountIntent(change: -1), label: {
@@ -94,6 +87,6 @@ extension ConfigurationAppIntent {
 #Preview(as: .systemSmall) {
     widget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley, count: 1)
-    SimpleEntry(date: .now, configuration: .starEyes, count: 0)
+    SimpleEntry(date: .now, configuration: .smiley)
+    SimpleEntry(date: .now, configuration: .starEyes)
 }

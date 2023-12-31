@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct ContentView: View {
-    @AppStorage("count") var count:Int = 0
+    @AppStorage(SharedData.countKey) var count:Int = 0
     
     var body: some View {
         VStack {

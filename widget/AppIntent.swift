@@ -35,14 +35,7 @@ struct CountIntent: AppIntent {
     }
     
     func perform() async throws -> some IntentResult {
-        
-        if let store = UserDefaults(suiteName: "group.test") {
-            let count = store.integer(forKey: "count")
-            store.setValue(count + self.change, forKey: "count")
-        } else {
-            return .result()
-        }
-            
+        let result = SharedData.it.changeCount(by: self.change)
         return .result()
     }
 }

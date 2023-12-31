@@ -12,7 +12,7 @@ struct interactive_widget_testApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .defaultAppStorage(UserDefaults(suiteName: "group.test") ?? UserDefaults.standard)
+                .defaultAppStorage(UserDefaults(suiteName: SharedData.suiteName) ?? UserDefaults.standard)
         }
     }
 }
