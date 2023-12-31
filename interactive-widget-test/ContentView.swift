@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct ContentView: View {
     @AppStorage("count") var count:Int = 0
@@ -17,11 +18,13 @@ struct ContentView: View {
             HStack {
                 Button(action: {
                     count -= 1
+                    WidgetCenter.shared.reloadAllTimelines()
                 }, label: {
                     Text("-1")
                 })
                 Button(action: {
                     count += 1
+                    WidgetCenter.shared.reloadAllTimelines()
                 }, label: {
                     Text("+1")
                 })
