@@ -8,12 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var count:Int = 0
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("\(count)")
+            
+            HStack {
+                Button(action: {
+                    count -= 1
+                }, label: {
+                    Text("-1")
+                })
+                Button(action: {
+                    count += 1
+                }, label: {
+                    Text("+1")
+                })
+            }
         }
         .padding()
     }
