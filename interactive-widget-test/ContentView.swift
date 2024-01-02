@@ -10,6 +10,7 @@ import WidgetKit
 
 struct ContentView: View {
     @AppStorage(SharedData.countKey) var count:Int = 0
+    @AppStorage(SharedData.stringKey) var str:String = ""
     
     var body: some View {
         VStack {
@@ -27,6 +28,23 @@ struct ContentView: View {
                     WidgetCenter.shared.reloadAllTimelines()
                 }, label: {
                     Text("+1")
+                })
+            }
+            
+            Text("\(str)")
+            
+            HStack {
+                Button(action: {
+                    str = "A"
+                    WidgetCenter.shared.reloadAllTimelines()
+                }, label: {
+                    Text("A")
+                })
+                Button(action: {
+                    str = "B"
+                    WidgetCenter.shared.reloadAllTimelines()
+                }, label: {
+                    Text("B")
                 })
             }
         }

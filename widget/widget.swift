@@ -55,6 +55,18 @@ struct widgetEntryView : View {
                     Text("+1")
                 })
             }
+            
+            Text("\(sharedData.getString())")
+            
+            HStack {
+                Button(intent: AlphabetIntent(change: "A"), label: {
+                    Text("A")
+                })
+                
+                Button(intent: AlphabetIntent(change: "B"), label: {
+                    Text("B")
+                })
+            }
         }
     }
 }

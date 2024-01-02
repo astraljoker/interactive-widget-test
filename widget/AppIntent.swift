@@ -39,3 +39,26 @@ struct CountIntent: AppIntent {
         return .result()
     }
 }
+
+
+struct AlphabetIntent: AppIntent {
+    static var title: LocalizedStringResource = "Alphabet"
+    static var description = IntentDescription("Change Alphabet")
+
+    
+    @Parameter(title: "Value")
+    var change: String
+    
+    init(change: String) {
+        self.change = change
+    }
+    
+    init() {
+        self.change = ""
+    }
+    
+    func perform() async throws -> some IntentResult {
+        let result = SharedData.it.setAlphabet(to: self.change)
+        return .result()
+    }
+}
