@@ -44,7 +44,7 @@ struct widgetEntryView : View {
     
     var body: some View {
         VStack {
-            Text("\(sharedData.count)")
+            Text("\(sharedData.getCount())")
             
             HStack {
                 Button(intent: CountIntent(change: -1), label: {
